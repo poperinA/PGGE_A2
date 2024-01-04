@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.SceneManagement;
 
 namespace PGGE
 {
@@ -97,6 +98,11 @@ namespace PGGE
                     Debug.Log("We load the default room for multiplayer");
                     PhotonNetwork.LoadLevel("MultiplayerMap00");
                 }
+            }
+
+            public void ToMenu()
+            {
+                SceneManager.LoadScene("Menu");
             }
         }
     }
