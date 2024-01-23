@@ -5,47 +5,55 @@ using Photon.Pun;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class ConnectToServer : MonoBehaviourPunCallbacks
+
+namespace PGGE
 {
-    //references to UI
-    public InputField usernameInput;
-    public Text buttonText;
-    public GameObject BackBtn;
-
-
-    //connects to server
-    public void OnClickConnect()
+    namespace Multiplayer
     {
-        //checks if the player input a username
-        if (usernameInput.text.Length >= 1)
+        public class ConnectToServer : MonoBehaviourPunCallbacks
         {
-            //stores the username
-            PhotonNetwork.NickName = usernameInput.text;
+            //references to UI
+            public InputField usernameInput;
+            public Text buttonText;
+            public GameObject BackBtn;
 
-            //shows that it is connecting
-            buttonText.text = "Connecting...";
-
-            //deactivates back button so process won't be interupted
-            BackBtn.SetActive(false);
 
             //connects to server
-            PhotonNetwork.ConnectUsingSettings();
-        }
-        else
-        {
-            Debug.Log("No Username");
-        }
-    }
+            public void OnClickConnect()
+            {
+                //checks if the player input a username
+                if (usernameInput.text.Length >= 1)
+                {
+                    //stores the username
+                    PhotonNetwork.NickName = usernameInput.text;
 
-    //loads the lobby
-    public override void OnConnectedToMaster()
-    {
-        SceneManager.LoadScene("Multiplayer_Lobby");
-    }
+                    //shows that it is connecting
+                    buttonText.text = "Connecting...";
 
-    //back button
-    public void ToMenu()
-    {
-        SceneManager.LoadScene("Menu");
+                    //deactivates back button so process won't be interupted
+                    BackBtn.SetActive(false);
+
+                    //connects to server
+                    PhotonNetwork.ConnectUsingSettings();
+                }
+                else
+                {
+                    Debug.Log("No Username");
+                }
+            }
+
+            //loads the lobby
+            public override void OnConnectedToMaster()
+            {
+                SceneManager.LoadScene("Multiplayer_Lobby");
+            }
+
+            //back button
+            public void ToMenu()
+            {
+                SceneManager.LoadScene("Menu");
+            }
+        }
     }
 }
+
