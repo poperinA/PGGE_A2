@@ -4,7 +4,7 @@ using UnityEngine;
 using PGGE.Patterns;
 using UnityEngine.SceneManagement;
 
-public class GameApp : Singleton<GameApp>
+public class GameManager : Singleton<GameManager>
 {
     private bool mPause;
 

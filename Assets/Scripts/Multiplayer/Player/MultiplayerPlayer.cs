@@ -4,7 +4,7 @@ using UnityEngine;
 using PGGE.Patterns;
 using Photon.Pun;
 
-public class Player_Multiplayer : MonoBehaviour
+public class MultiplayerPlayer : MonoBehaviour
 {
     private PhotonView mPhotonView;
 
@@ -47,9 +47,9 @@ public class Player_Multiplayer : MonoBehaviour
     {
         mPhotonView = GetComponent<PhotonView>();
 
-        mFsm.Add(new PlayerState_Multiplayer_MOVEMENT(this));
-        mFsm.Add(new PlayerState_Multiplayer_ATTACK(this));
-        mFsm.Add(new PlayerState_Multiplayer_RELOAD(this));
+        mFsm.Add(new MultiplayerPlayerState_MOVEMENT(this));
+        mFsm.Add(new MultiplayerPlayerState_ATTACK(this));
+        mFsm.Add(new MultiplayerPlayerState_RELOAD(this));
         mFsm.SetCurrentState((int)PlayerStateType.MOVEMENT);
     }
 

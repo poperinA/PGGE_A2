@@ -9,7 +9,7 @@ namespace PGGE
 {
     namespace Multiplayer
     {
-        public class ConnectionController : MonoBehaviourPunCallbacks
+        public class NetworkManager : MonoBehaviourPunCallbacks
         {
             const string gameVersion = "1";
 

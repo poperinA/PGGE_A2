@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using PGGE.Patterns;
 
-public class PlayerState_Multiplayer : FSMState
+public class MultiplayerPlayerState : FSMState
 {
-    protected Player_Multiplayer mPlayer = null;
+    protected MultiplayerPlayer mPlayer = null;
 
-    public PlayerState_Multiplayer(Player_Multiplayer player) 
+    public MultiplayerPlayerState(MultiplayerPlayer player) 
         : base()
     {
         mPlayer = player;
@@ -32,9 +32,9 @@ public class PlayerState_Multiplayer : FSMState
     }
 }
 
-public class PlayerState_Multiplayer_MOVEMENT : PlayerState_Multiplayer
+public class MultiplayerPlayerState_MOVEMENT : MultiplayerPlayerState
 {
-    public PlayerState_Multiplayer_MOVEMENT(Player_Multiplayer player) : base(player)
+    public MultiplayerPlayerState_MOVEMENT(MultiplayerPlayer player) : base(player)
     {
         mId = (int)(PlayerStateType.MOVEMENT);
     }
@@ -72,8 +72,8 @@ public class PlayerState_Multiplayer_MOVEMENT : PlayerState_Multiplayer
             {
                 if (mPlayer.mBulletsInMagazine > 0)
                 {
-                    PlayerState_Multiplayer_ATTACK attack =
-                  (PlayerState_Multiplayer_ATTACK)mFsm.GetState(
+                    MultiplayerPlayerState_ATTACK attack =
+                  (MultiplayerPlayerState_ATTACK)mFsm.GetState(
                             (int)PlayerStateType.ATTACK);
 
                     attack.AttackID = i;
@@ -94,7 +94,7 @@ public class PlayerState_Multiplayer_MOVEMENT : PlayerState_Multiplayer
     }
 }
 
-public class PlayerState_Multiplayer_ATTACK : PlayerState_Multiplayer
+public class MultiplayerPlayerState_ATTACK : MultiplayerPlayerState
 {
     private int mAttackID = 0;
     private string mAttackName;
@@ -112,7 +112,7 @@ public class PlayerState_Multiplayer_ATTACK : PlayerState_Multiplayer
         }
     }
 
-    public PlayerState_Multiplayer_ATTACK(Player_Multiplayer player) : base(player)
+    public MultiplayerPlayerState_ATTACK(MultiplayerPlayer player) : base(player)
     {
         mId = (int)(PlayerStateType.ATTACK);
     }
@@ -190,12 +190,12 @@ public class PlayerState_Multiplayer_ATTACK : PlayerState_Multiplayer
     }
 }
 
-public class PlayerState_Multiplayer_RELOAD : PlayerState_Multiplayer
+public class MultiplayerPlayerState_RELOAD : MultiplayerPlayerState
 {
     public float ReloadTime = 3.0f;
     float dt = 0.0f;
     public int previousState;
-    public PlayerState_Multiplayer_RELOAD(Player_Multiplayer player) : base(player)
+    public MultiplayerPlayerState_RELOAD(MultiplayerPlayer player) : base(player)
     {
         mId = (int)(PlayerStateType.RELOAD);
     }
