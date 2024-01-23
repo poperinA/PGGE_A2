@@ -39,7 +39,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     public override void OnLeftRoom()
     {
         //Debug.LogFormat("OnLeftRoom()");
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("Multiplayer_Lobby");
     }
 
 }
