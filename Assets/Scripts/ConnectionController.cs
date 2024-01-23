@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.SceneManagement;
@@ -14,10 +13,10 @@ namespace PGGE
         {
             const string gameVersion = "1";
 
-            public byte maxPlayersPerRoom = 5;
+            public byte maxPlayersPerRoom = 3;
 
+            public GameObject mConnectionProgress;
             public GameObject mBtnJoinRoom;
-            public Text mBtnTxt;
             public GameObject mBtnBack;
             public GameObject mInpPlayerName;
 
@@ -31,11 +30,19 @@ namespace PGGE
                 PhotonNetwork.AutomaticallySyncScene = true;
             }
 
+
+            // Start is called before the first frame update
+            void Start()
+            {
+                mConnectionProgress.SetActive(false);
+            }
+
             public void Connect()
             {
-                //mBtnJoinRoom.SetActive(false);
+                mBtnJoinRoom.SetActive(false);
                 mBtnBack.SetActive(false);
-                //mInpPlayerName.SetActive(false);
+                mInpPlayerName.SetActive(false);
+                mConnectionProgress.SetActive(true);
 
                 // we check if we are connected or not, we join if we are, 
                 // else we initiate the connection to the server.
@@ -50,7 +57,6 @@ namespace PGGE
                 {
                     // Connect to Photon Online Server.
                     isConnecting = PhotonNetwork.ConnectUsingSettings();
-                    mBtnTxt.text = "Connecting...";
                     PhotonNetwork.GameVersion = gameVersion;
                 }
             }
