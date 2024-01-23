@@ -23,6 +23,10 @@ namespace PGGE
             //reference to created room name by player
             public InputField roomInputField;
 
+            public RoomItem roomItemPrefab;
+            List<RoomItem> roomItemsList = new List<RoomItem>();
+            public Transform contentObject;
+
 
             //shows join panel
             public void JoinPanel()
@@ -66,6 +70,29 @@ namespace PGGE
                     PhotonNetwork.LoadLevel("MultiplayerMap00");
                 }
             }
+
+            public override void OnRoomListUpdate(List<RoomInfo> roomList)
+            {
+                UpdateRoomList(roomList);
+            }
+
+            void UpdateRoomList(List<RoomInfo> list)
+            {
+                foreach (RoomItem item in roomItemsList)
+                {
+                    Destroy(item.gameObject);
+                }
+                roomItemsList.Clear();
+
+                foreach (RoomInfo room in list)
+                {
+                    RoomItem newRoom = Instantiate(roomItemPrefab, contentObject);
+                    newRoom.SetRoomName(room.Name);
+                    roomItemsList.Add(newRoom);
+                }
+            }
+
+
         }
     }
 }
