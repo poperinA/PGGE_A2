@@ -31,6 +31,9 @@ namespace PGGE
                 PhotonNetwork.AutomaticallySyncScene = true;
             }
 
+
+            //Connect to a room
+
             public void Connect()
             {
                 //mBtnJoinRoom.SetActive(false);
@@ -54,6 +57,7 @@ namespace PGGE
                     PhotonNetwork.GameVersion = gameVersion;
                 }
             }
+
             public override void OnConnectedToMaster()
             {
                 if (isConnecting)
@@ -62,6 +66,20 @@ namespace PGGE
                     PhotonNetwork.JoinRandomRoom();
                 }
             }
+
+            public override void OnJoinedRoom()
+            {
+                Debug.Log("OnJoinedRoom() called by PUN. Client is in a room.");
+                if (PhotonNetwork.IsMasterClient)
+                {
+                    Debug.Log("We load the default room for multiplayer");
+                    PhotonNetwork.LoadLevel("MultiplayerMap00");
+                }
+            }
+
+
+
+            //Connections failed
 
             public override void OnDisconnected(DisconnectCause cause)
             {
@@ -86,15 +104,8 @@ namespace PGGE
                     });
             }
 
-            public override void OnJoinedRoom()
-            {
-                Debug.Log("OnJoinedRoom() called by PUN. Client is in a room.");
-                if (PhotonNetwork.IsMasterClient)
-                {
-                    Debug.Log("We load the default room for multiplayer");
-                    PhotonNetwork.LoadLevel("MultiplayerMap00");
-                }
-            }
+
+            //Back Button
 
             public void ToMenu()
             {
