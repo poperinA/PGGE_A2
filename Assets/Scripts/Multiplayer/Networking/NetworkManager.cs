@@ -1,111 +1,87 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.SceneManagement;
 
-namespace PGGE
+namespace PGGE.Multiplayer
 {
-    namespace Multiplayer
+    public class NetworkManager : MonoBehaviourPunCallbacks
     {
-        public class NetworkManager : MonoBehaviourPunCallbacks
+        private const string gameVersion = "1";
+
+        [Header("Connection Settings")]
+        [SerializeField] private byte maxPlayersPerRoom = 5;
+        [SerializeField] private Text joinButtonText;
+        [SerializeField] private GameObject backButton;
+
+
+        private bool isConnecting = false;
+
+        private void Awake()
         {
-            const string gameVersion = "1";
+            PhotonNetwork.AutomaticallySyncScene = true;
+        }
 
-            public byte maxPlayersPerRoom = 3;
-
-            public GameObject mConnectionProgress;
-            public GameObject mBtnJoinRoom;
-            public GameObject mBtnBack;
-            public GameObject mInpPlayerName;
-
-            bool isConnecting = false;
-
-            void Awake()
+        public void Connect()
+        {
+            if (PhotonNetwork.IsConnected)
             {
-                // this makes sure we can use PhotonNetwork.LoadLevel() on 
-                // the master client and all clients in the same 
-                // room sync their level automatically
-                PhotonNetwork.AutomaticallySyncScene = true;
+                PhotonNetwork.JoinRandomRoom();
             }
-
-
-            // Start is called before the first frame update
-            void Start()
+            else
             {
-                mConnectionProgress.SetActive(false);
+                isConnecting = PhotonNetwork.ConnectUsingSettings();
+                joinButtonText.text = "Connecting...";
+                backButton.SetActive(false);
+                PhotonNetwork.GameVersion = gameVersion;
             }
+        }
 
-            public void Connect()
+        public override void OnConnectedToMaster()
+        {
+            if (isConnecting)
             {
-                mBtnJoinRoom.SetActive(false);
-                mBtnBack.SetActive(false);
-                mInpPlayerName.SetActive(false);
-                mConnectionProgress.SetActive(true);
+                Debug.Log("OnConnectedToMaster() was called by PUN");
+                PhotonNetwork.JoinRandomRoom();
+            }
+        }
 
-                // we check if we are connected or not, we join if we are, 
-                // else we initiate the connection to the server.
-                if (PhotonNetwork.IsConnected)
+        public override void OnJoinedRoom()
+        {
+            Debug.Log("OnJoinedRoom() called by PUN. Client is in a room.");
+            if (PhotonNetwork.IsMasterClient)
+            {
+                Debug.Log("We load the default room for multiplayer");
+                PhotonNetwork.LoadLevel("MultiplayerMap00");
+            }
+        }
+
+        public override void OnDisconnected(DisconnectCause cause)
+        {
+            Debug.LogWarningFormat("OnDisconnected() was called by PUN with reason {0}", cause);
+            isConnecting = false;
+        }
+
+        public override void OnJoinRandomFailed(short returnCode, string message)
+        {
+            Debug.Log("OnJoinRandomFailed() was called by PUN. " +
+                "No random room available" +
+                ", so we create one by Calling: " +
+                "PhotonNetwork.CreateRoom");
+
+            PhotonNetwork.CreateRoom(null,
+                new RoomOptions
                 {
-                    // Attempt joining a random Room. 
-                    // If it fails, we'll get notified in 
-                    // OnJoinRandomFailed() and we'll create one.
-                    PhotonNetwork.JoinRandomRoom();
-                }
-                else
-                {
-                    // Connect to Photon Online Server.
-                    isConnecting = PhotonNetwork.ConnectUsingSettings();
-                    PhotonNetwork.GameVersion = gameVersion;
-                }
-            }
-            public override void OnConnectedToMaster()
-            {
-                if (isConnecting)
-                {
-                    Debug.Log("OnConnectedToMaster() was called by PUN");
-                    PhotonNetwork.JoinRandomRoom();
-                }
-            }
+                    MaxPlayers = maxPlayersPerRoom
+                });
+        }
 
-            public override void OnDisconnected(DisconnectCause cause)
-            {
-                Debug.LogWarningFormat("OnDisconnected() was called by PUN with reason {0}", cause);
-                isConnecting = false;
-            }
-
-            public override void OnJoinRandomFailed(short returnCode, string message)
-            {
-                Debug.Log("OnJoinRandomFailed() was called by PUN. " +
-                    "No random room available" +
-                    ", so we create one by Calling: " +
-                    "PhotonNetwork.CreateRoom");
-
-                // Failed to join a random room.
-                // This may happen if no room exists or 
-                // they are all full. In either case, we create a new room.
-                PhotonNetwork.CreateRoom(null,
-                    new RoomOptions
-                    {
-                        MaxPlayers = maxPlayersPerRoom
-                    });
-            }
-
-            public override void OnJoinedRoom()
-            {
-                Debug.Log("OnJoinedRoom() called by PUN. Client is in a room.");
-                if (PhotonNetwork.IsMasterClient)
-                {
-                    Debug.Log("We load the default room for multiplayer");
-                    PhotonNetwork.LoadLevel("MultiplayerMap00");
-                }
-            }
-
-            public void ToMenu()
-            {
-                SceneManager.LoadScene("Menu");
-            }
+        public void ToMenu()
+        {
+            SceneManager.LoadScene("Menu");
         }
     }
 }
