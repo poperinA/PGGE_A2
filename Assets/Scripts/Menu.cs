@@ -5,17 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void OnClickSinglePlayer()
     {
@@ -26,7 +15,7 @@ public class Menu : MonoBehaviour
     public void OnClickMultiPlayer()
     {
         //Debug.Log("Loading multiplayer game");
-        SceneManager.LoadScene("Multiplayer_Launcher");
+        SceneManager.LoadScene("Multiplayer_ConnectToServer");
     }
 
 }
