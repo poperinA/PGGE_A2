@@ -1210,7 +1210,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   usernameInput: {fileID: 421955838}
   buttonText: {fileID: 1732166999}
-  BackBtn: {fileID: 901620073}
 --- !u!4 &1630218558
 Transform:
   m_ObjectHideFlags: 0
