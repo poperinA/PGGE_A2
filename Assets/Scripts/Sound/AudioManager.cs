@@ -27,7 +27,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    // to use sounds in scripts, use "AudioManager.Instance"
+    // to use sounds, use "AudioManager.Instance"
     // then call the playMusic, playSFX etc. functions,
     // followed by the specific sound clip you added
     // example: AudioManager.Instance.playSFX("WrongItem");

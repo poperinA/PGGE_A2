@@ -29,6 +29,9 @@ namespace PGGE.Multiplayer
         [SerializeField] private Text joinButtonText;
         [SerializeField] private GameObject backButton;
 
+        //added a header for readability and organisation
+        //Flags: Handles checks with booleans
+        [Header("Flags")]
         private bool isConnecting = false;
 
         #endregion
@@ -63,6 +66,7 @@ namespace PGGE.Multiplayer
         {
             isConnecting = true;
             joinButtonText.text = "Connecting...";
+            backButton.SetActive(false);
             PhotonNetwork.GameVersion = gameVersion;
             PhotonNetwork.ConnectUsingSettings();
         }

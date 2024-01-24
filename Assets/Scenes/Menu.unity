@@ -412,11 +412,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 344eaac0726af734b9d1d5cbce560593, type: 3}
---- !u!82 &436921629 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 8217109563774598489, guid: 344eaac0726af734b9d1d5cbce560593, type: 3}
+--- !u!114 &528668527 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5334399099512730436, guid: 344eaac0726af734b9d1d5cbce560593, type: 3}
   m_PrefabInstance: {fileID: 436921628}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea29346fbc90f2b469154460cd1d18c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &776956471
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,32 +575,32 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 436921629}
-          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-          m_MethodName: PlayOneShot
-          m_Mode: 2
+        - m_Target: {fileID: 528668527}
+          m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+          m_MethodName: playSFX
+          m_Mode: 5
           m_Arguments:
-            m_ObjectArgument: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: 
+            m_StringArgument: btnHover
             m_BoolArgument: 0
           m_CallState: 2
   - eventID: 2
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 436921629}
-          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-          m_MethodName: PlayOneShot
-          m_Mode: 2
+        - m_Target: {fileID: 528668527}
+          m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+          m_MethodName: playSFX
+          m_Mode: 5
           m_Arguments:
-            m_ObjectArgument: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: 
+            m_StringArgument: btnClick
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!1 &948982417
@@ -749,32 +755,32 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 436921629}
-          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-          m_MethodName: PlayOneShot
-          m_Mode: 2
+        - m_Target: {fileID: 528668527}
+          m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+          m_MethodName: playSFX
+          m_Mode: 5
           m_Arguments:
-            m_ObjectArgument: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: 
+            m_StringArgument: btnHover
             m_BoolArgument: 0
           m_CallState: 2
   - eventID: 2
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 436921629}
-          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-          m_MethodName: PlayOneShot
-          m_Mode: 2
+        - m_Target: {fileID: 528668527}
+          m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+          m_MethodName: playSFX
+          m_Mode: 5
           m_Arguments:
-            m_ObjectArgument: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: 
+            m_StringArgument: btnClick
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!1 &1455062413
