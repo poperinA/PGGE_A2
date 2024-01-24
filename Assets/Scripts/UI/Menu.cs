@@ -5,18 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    //removed unused methods
     public void OnClickSinglePlayer()
     {
         //Debug.Log("Loading singleplayer game");
@@ -27,6 +16,13 @@ public class Menu : MonoBehaviour
     {
         //Debug.Log("Loading multiplayer game");
         SceneManager.LoadScene("Multiplayer_Launcher");
+    }
+
+    //so that player can leave in singleplayer
+    public void OnLeftRoom()
+    {
+        //Debug.LogFormat("OnLeftRoom()");
+        SceneManager.LoadScene("Menu");
     }
 
 }
