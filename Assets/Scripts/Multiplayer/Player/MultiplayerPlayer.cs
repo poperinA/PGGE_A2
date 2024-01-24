@@ -60,10 +60,6 @@ public class MultiplayerPlayer : MonoBehaviour
         mFsm.Update();
         Aim();
 
-        // For Student ----------------------------------------------------//
-        // Implement the logic of button clicks for shooting. 
-        //-----------------------------------------------------------------//
-
         if (Input.GetButton("Fire1"))
         {
             mAttackButtons[0] = true;
@@ -100,29 +96,6 @@ public class MultiplayerPlayer : MonoBehaviour
 
     public void Aim()
     {
-        // For Student ----------------------------------------------------------//
-        // Implement the logic of aiming and showing the crosshair
-        // if there is an intersection.
-        //
-        // Hints:
-        // Find the direction of fire.
-        // Find gunpoint as mentioned in the worksheet.
-        // Find the layer mask for objects that you want to intersect with.
-        //
-        // Do the Raycast
-        // if (intersected)
-        // {
-        //     // Draw a line as debug to show the aim of fire in scene view.
-        //     // Find the transformed intersected point to screenspace
-        //     // and then transform the crosshair position to this
-        //     // new position.
-        //     // Enable or set active the crosshair gameobject.
-        // }
-        // else
-        // {
-        //     // Hide or set inactive the crosshair gameobject.
-        // }
-        //-----------------------------------------------------------------------//
 
         Vector3 dir = -mGunTransform.right.normalized;
         // Find gunpoint as mentioned in the worksheet.
@@ -179,16 +152,6 @@ public class MultiplayerPlayer : MonoBehaviour
 
         mPlayerMovement.HandleInputs();
         mPlayerMovement.Move();
-    }
-
-    public void NoAmmo()
-    {
-
-    }
-
-    public void Reload()
-    {
-
     }
 
     public void Fire(int id)

@@ -47,23 +47,6 @@ public class MultiplayerPlayerState_MOVEMENT : MultiplayerPlayerState
     public override void Update()
     {
         base.Update();
-
-        // For Student ---------------------------------------------------//
-        // Implement the logic of player movement. 
-        //----------------------------------------------------------------//
-        // Hint:
-        //----------------------------------------------------------------//
-        // You should remember that the logic for movement
-        // has already been implemented in PlayerMovement.cs.
-        // So, how do we make use of that?
-        // We certainly do not want to copy and paste the movement 
-        // code from PlayerMovement to here.
-        // Think of a way to call the Move method. 
-        //
-        // You should also
-        // check if fire buttons are pressed so that 
-        // you can transit to ATTACK state.
-
         mPlayer.Move();
 
         for (int i = 0; i < mPlayer.mAttackButtons.Length; ++i)
@@ -128,40 +111,6 @@ public class MultiplayerPlayerState_ATTACK : MultiplayerPlayerState
     public override void Update()
     {
         base.Update();
-
-        // For Student ---------------------------------------------------//
-        // Implement the logic of attack, reload and revert to movement. 
-        //----------------------------------------------------------------//
-        // Hint:
-        //----------------------------------------------------------------//
-        // 1. Transition to RELOAD
-        // Notice that we have three variables, viz., 
-        // mAmunitionCount
-        // mBulletsInMagazine
-        // mMaxAmunitionBeforeReload
-        // You will need to make use of these variables while
-        // implementing the transition to RELOAD.
-        //
-        // 2. Staying in ATTACK state
-        // You should stay in ATTACK state as long as the 
-        // Fire buttons are pressed. During ATTACK state
-        // you should trigger the correct ATTACK animation
-        // based on which button is pressed and shoot bullets.
-        // Every bullet shot should reduce the count of mAmunitionCount
-        // and mBulletsInMagazine.
-        // Once mBulletsInMagazine reaches to 0 you should 
-        // transit to RELOAD state.
-        //
-        // 3. Transition to MOVEMENT state
-        // You should transit to MOVEMENT state when any of the 
-        // following two situations happen.
-        // First you have exhausted all your bullets, that means your
-        // mAmunitionCount is 0 or if you do not press any of the
-        // Fire buttons.
-        // Discuss with your tutor if you find any difficulties
-        // in implementing this section.        
-        
-        // For tutor - start ---------------------------------------------//
         //Debug.Log("Ammo count: " + mPlayer.mAmunitionCount + ", In Magazine: " + mPlayer.mBulletsInMagazine);
         if (mPlayer.mBulletsInMagazine == 0 && mPlayer.mAmunitionCount > 0)
         {
@@ -186,7 +135,6 @@ public class MultiplayerPlayerState_ATTACK : MultiplayerPlayerState
             mPlayer.mAnimator.SetBool(mAttackName, false);
             mPlayer.mFsm.SetCurrentState((int)PlayerStateType.MOVEMENT);
         }
-        // For tutor - end   ---------------------------------------------//
     }
 }
 
@@ -227,9 +175,5 @@ public class MultiplayerPlayerState_RELOAD : MultiplayerPlayerState
         {
             mPlayer.mFsm.SetCurrentState((int)PlayerStateType.MOVEMENT);
         }
-    }
-
-    public override void FixedUpdate()
-    {
     }
 }

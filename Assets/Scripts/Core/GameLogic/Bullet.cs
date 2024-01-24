@@ -10,10 +10,6 @@ public class Bullet : MonoBehaviour
         StartCoroutine(Coroutine_Destroy(10.0f));
     }
 
-    void Update()
-    {
-    }
-
     IEnumerator Coroutine_Destroy(float duration)
     {
         yield return new WaitForSeconds(duration);
