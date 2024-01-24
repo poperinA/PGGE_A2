@@ -179,7 +179,6 @@ public class PlayerState_ATTACK : PlayerState
         if (mPlayer.mAmunitionCount <= 0 && mPlayer.mBulletsInMagazine <= 0)
         {
             mPlayer.mFsm.SetCurrentState((int)PlayerStateType.MOVEMENT);
-            mPlayer.NoAmmo();
             return;
         }
 
@@ -210,7 +209,6 @@ public class PlayerState_RELOAD : PlayerState
     public override void Enter()
     {
         mPlayer.mAnimator.SetTrigger("Reload");
-        mPlayer.Reload();
         dt = 0.0f;
     }
     public override void Exit()
