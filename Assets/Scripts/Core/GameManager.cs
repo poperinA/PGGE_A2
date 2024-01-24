@@ -6,65 +6,103 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
-    private bool mPause;
+    #region Variables
+
+    //renamed variable for readability
+    private bool isPaused;
+
+    #endregion
+
+    #region Unity Callbacks
 
     void Start()
     {
-        mPause = false;
-        SceneManager.LoadScene("Menu");
+        isPaused = false;
+        LoadInitialScene("Menu");
     }
 
-    // Update is called once per frame
+    //method extraction - CheckPauseInput, TogglePause, PauseGame, and ResumeGame to make code modular
     void Update()
+    {
+        CheckPauseInput();
+    }
+
+    #endregion
+
+    #region Pause Mechanism
+
+    //to check if escape key is pressed
+    private void CheckPauseInput()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            GamePaused = !GamePaused;
+            TogglePauseState();
         }
     }
 
-    public bool GamePaused
+    //to toggle between pausing/resuming
+    private void TogglePauseState()
     {
-        get { return mPause; }
-        set
+        isPaused = !isPaused;
+
+        if (isPaused)
         {
-            mPause = value;
-            //mOnPause?.Invoke(GamePaused);
-            if (GamePaused)
-            {
-                Time.timeScale = 0;
-            }
-            else
-            {
-                Time.timeScale = 1;
-            }
+            PauseGame();
         }
-    }    
-    
-    // called first
-    void OnEnable()
-    {
-        Debug.Log("OnEnable called");
-        SceneManager.sceneLoaded += OnSceneLoaded;
-        SceneManager.sceneLoaded += OnSceneLoaded2;
+        else
+        {
+            ResumeGame();
+        }
     }
 
-    // called when the game terminates
-    void OnDisable()
+    //pauses the game
+    private void PauseGame()
     {
-        Debug.Log("OnDisable");
-        SceneManager.sceneLoaded -= OnSceneLoaded2;
-        SceneManager.sceneLoaded -= OnSceneLoaded;
+        Time.timeScale = 0;
     }
 
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    //resumes the game
+    private void ResumeGame()
     {
-        Debug.Log("OnSceneLoaded - Scene Index: " + scene.buildIndex + " Scene Name: " + scene.name);
-        //Debug.Log(mode);
+        Time.timeScale = 1;
     }
 
-    void OnSceneLoaded2(Scene scene, LoadSceneMode mode)
+    #endregion
+
+    #region Scene Events
+
+    private void OnEnable()
     {
-        Debug.Log("Hello. Welocome to my scene.");
+        SceneManager.sceneLoaded += LogSceneDetails;
+        SceneManager.sceneLoaded += WelcomeToScene;
     }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= WelcomeToScene;
+        SceneManager.sceneLoaded -= LogSceneDetails;
+    }
+
+    //changed method name for readability
+    private void LogSceneDetails(Scene loadedScene, LoadSceneMode loadMode)
+    {
+        Debug.Log($"Scene Loaded: Index - {loadedScene.buildIndex}, Name - {loadedScene.name}");
+    }
+
+    //changed method name for readability
+    private void WelcomeToScene(Scene loadedScene, LoadSceneMode loadMode)
+    {
+        Debug.Log("Hello. Welcome to my scene.");
+    }
+
+    #endregion
+
+    #region Scene Loading
+    //created simplified method to load scene (called in Start())
+    private void LoadInitialScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
+
+    #endregion
 }
