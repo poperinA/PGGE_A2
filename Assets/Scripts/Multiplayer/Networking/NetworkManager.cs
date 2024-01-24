@@ -15,7 +15,6 @@ namespace PGGE.Multiplayer
 
         private const string gameVersion = "1";
 
-
         //changed variable names to be more clear
 
         //added a header for readability and organisation
