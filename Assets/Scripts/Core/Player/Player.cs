@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using PGGE.Patterns;
 
+//removed redundant/unused code
 public class Player : MonoBehaviour
 {
     [HideInInspector]

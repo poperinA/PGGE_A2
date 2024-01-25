@@ -4,6 +4,7 @@ using UnityEngine;
 using PGGE.Patterns;
 using Photon.Pun;
 
+//removed redundant/unused code
 public class MultiplayerPlayer : MonoBehaviour
 {
     private PhotonView mPhotonView;

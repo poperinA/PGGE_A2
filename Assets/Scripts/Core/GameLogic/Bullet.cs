@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//removed redundant/unused code
+
 public class Bullet : MonoBehaviour
 {
     void Start()

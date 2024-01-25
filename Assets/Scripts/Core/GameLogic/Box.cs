@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//removed redundant/unused code
 public class Box : MonoBehaviour, IDamageable
 {
     public void TakeDamage()
