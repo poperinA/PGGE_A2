@@ -108,7 +108,7 @@ public class PlayerMovement : MonoBehaviour
     void Jump()
     {
         mAnimator.SetTrigger("Jump");
-        mVelocity.y += Mathf.Sqrt(mJumpHeight * -2f * mGravity);
+        //mVelocity.y += Mathf.Sqrt(mJumpHeight * -2f * mGravity);
     }
 
     private Vector3 HalfHeight;
